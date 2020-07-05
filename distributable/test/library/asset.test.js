@@ -2,8 +2,6 @@
 
 var _parcelBundler = _interopRequireDefault(require("parcel-bundler"));
 
-var _prettier = require("prettier");
-
 var _pug = _interopRequireDefault(require("pug"));
 
 var _ava = _interopRequireDefault(require("ava"));
@@ -17,12 +15,6 @@ function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 (0, _ava.default)('import(require.resolve(\'./target/target.js\')', async test => {
-  let unbundledContentFn = _pug.default.compileFile(require.resolve('./source/source.pug'));
-
-  let data = {
-    'name': 'Bob'
-  };
-  test.log(`unbundledContentFn(...) = '${unbundledContentFn(data)}'`);
   let bundler = new _parcelBundler.default(require.resolve('./source/source.js'), {
     'cache': false,
     'outDir': `${__dirname}/target`,
@@ -36,7 +28,12 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
   let {
     default: bundledContentFn
   } = await Promise.resolve(`${require.resolve('./target/target.js')}`).then(s => _interopRequireWildcard(require(s)));
-  test.log(`bundledContentFn(...) = '${bundledContentFn(data)}'`);
+
+  let unbundledContentFn = _pug.default.compileFile(require.resolve('./source/source.pug'));
+
+  let data = {
+    'name': 'Bob'
+  };
   test.is(bundledContentFn(data), unbundledContentFn(data));
 });
 //# sourceMappingURL=asset.test.js.map
