@@ -4,7 +4,7 @@ import Test from 'ava'
 
 import Plugin from '../../index.js'
 
-Test('import(require.resolve(\'./target/target.js\')', async (test) => {
+Test('Bundler(require.resolve(\'./source/source.js\'), { ... })', async (test) => {
 
   let bundler = new Bundler(require.resolve('./source/source.js'), {
     'cache': false,
