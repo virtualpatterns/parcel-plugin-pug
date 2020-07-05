@@ -1,2 +1,2 @@
-# mablung-babel-plugin-virtual-pug
+# parcel-plugin-pug
 TBD
