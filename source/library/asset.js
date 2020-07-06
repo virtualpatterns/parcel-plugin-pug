@@ -1,4 +1,6 @@
 import { Asset as BaseAsset } from 'parcel-bundler'
+import { format as Format } from 'prettier'
+import Path from 'path'
 import Pug from 'pug'
 
 class Asset extends BaseAsset {
@@ -12,11 +14,28 @@ class Asset extends BaseAsset {
 
     // let configuration = await this.getConfig()
 
-    let compiledFnSource = Pug.compileFileClient(this.name, { 'name': 'templateFn' })
+    let source = null
+    
+    source = Pug.compileClient(this.contents, { 
+      'filename': this.relativeName,      
+      'basedir': Path.dirname(this.name),
+      'name': 'templateFn' 
+    })
+
+    source = `export default function(locals) { ${source} return templateFn(locals) }`
+
+    source = Format(source, {
+      'bracketSpacing': true,
+      'parser': 'babel',
+      'printWidth': 100,
+      'singleQuote': true,
+      'tabWidth': 2,
+      'trailingComma': 'none'
+    })
 
     return [{
       type: 'js',
-      value: `export default function(locals) { ${compiledFnSource} return templateFn(locals) }`
+      value: source
     }] 
   
   }
