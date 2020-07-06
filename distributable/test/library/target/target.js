@@ -127,30 +127,30 @@ exports.default = _default;
 
 function _default(locals) {
   function pug_escape(e) {
-    var a = "" + e,
+    var a = '' + e,
         t = pug_match_html.exec(a);
     if (!t) return e;
     var r,
         c,
         n,
-        s = "";
+        s = '';
 
     for (r = t.index, c = 0; r < a.length; r++) {
       switch (a.charCodeAt(r)) {
         case 34:
-          n = "&quot;";
+          n = '&quot;';
           break;
 
         case 38:
-          n = "&amp;";
+          n = '&amp;';
           break;
 
         case 60:
-          n = "&lt;";
+          n = '&lt;';
           break;
 
         case 62:
-          n = "&gt;";
+          n = '&gt;';
           break;
 
         default:
@@ -167,64 +167,57 @@ function _default(locals) {
 
   function pug_rethrow(n, e, t, r) {
     if (!(n instanceof Error)) throw n;
-    if (!("undefined" == typeof window && e || r)) throw n.message += " on line " + t, n;
+    if (!('undefined' == typeof window && e || r)) throw n.message += ' on line ' + t, n;
 
     try {
-      r = r || require("fs").readFileSync(e, "utf8");
+      r = r || require('fs').readFileSync(e, 'utf8');
     } catch (e) {
       pug_rethrow(n, null, t);
     }
 
     var a = 3,
-        i = r.split("\n"),
+        i = r.split('\n'),
         o = Math.max(t - a, 0),
         h = Math.min(i.length, t + a),
         a = i.slice(o, h).map(function (n, e) {
       var r = e + o + 1;
-      return (r == t ? "  > " : "    ") + r + "| " + n;
-    }).join("\n");
+      return (r == t ? '  > ' : '    ') + r + '| ' + n;
+    }).join('\n');
     n.path = e;
 
     try {
-      n.message = (e || "Pug") + ":" + t + "\n" + a + "\n\n" + n.message;
+      n.message = (e || 'Pug') + ':' + t + '\n' + a + '\n\n' + n.message;
     } catch (n) {}
 
     throw n;
   }
 
   function templateFn(locals) {
-    var pug_html = "",
+    var pug_html = '',
         pug_mixins = {},
         pug_interp;
     var pug_debug_filename, pug_debug_line;
 
     try {
-      ;
       var locals_for_with = locals || {};
       (function (name) {
-        ;
         pug_debug_line = 1;
-        pug_debug_filename = "\u002FVolumes\u002FDUMBLEDORE1\u002FUsers\u002Ffficnar\u002FProjects\u002FShared Projects\u002Fparcel-plugin-pug\u002Fdistributable\u002Ftest\u002Flibrary\u002Fsource\u002Fsource.pug";
-        pug_html = pug_html + "\u003Cp\u003E";
-        ;
+        pug_debug_filename = 'source.pug';
+        pug_html = pug_html + '\u003Cp\u003E';
         pug_debug_line = 1;
-        pug_debug_filename = "\u002FVolumes\u002FDUMBLEDORE1\u002FUsers\u002Ffficnar\u002FProjects\u002FShared Projects\u002Fparcel-plugin-pug\u002Fdistributable\u002Ftest\u002Flibrary\u002Fsource\u002Fsource.pug";
-        pug_html = pug_html + "Hello, ";
-        ;
+        pug_debug_filename = 'source.pug';
+        pug_html = pug_html + 'Hello, ';
         pug_debug_line = 1;
-        pug_debug_filename = "\u002FVolumes\u002FDUMBLEDORE1\u002FUsers\u002Ffficnar\u002FProjects\u002FShared Projects\u002Fparcel-plugin-pug\u002Fdistributable\u002Ftest\u002Flibrary\u002Fsource\u002Fsource.pug";
-        pug_html = pug_html + pug_escape(null == (pug_interp = name) ? "" : pug_interp);
-        ;
+        pug_debug_filename = 'source.pug';
+        pug_html = pug_html + pug_escape(null == (pug_interp = name) ? '' : pug_interp);
         pug_debug_line = 1;
-        pug_debug_filename = "\u002FVolumes\u002FDUMBLEDORE1\u002FUsers\u002Ffficnar\u002FProjects\u002FShared Projects\u002Fparcel-plugin-pug\u002Fdistributable\u002Ftest\u002Flibrary\u002Fsource\u002Fsource.pug";
-        pug_html = pug_html + "!\u003C\u002Fp\u003E";
-      }).call(this, "name" in locals_for_with ? locals_for_with.name : typeof name !== 'undefined' ? name : undefined);
-      ;
+        pug_debug_filename = 'source.pug';
+        pug_html = pug_html + '!\u003C\u002Fp\u003E';
+      }).call(this, 'name' in locals_for_with ? locals_for_with.name : typeof name !== 'undefined' ? name : undefined);
     } catch (err) {
       pug_rethrow(err, pug_debug_filename, pug_debug_line);
     }
 
-    ;
     return pug_html;
   }
 
